@@ -2,12 +2,12 @@
 
 namespace App;
 
-use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Database\Eloquent\Model;
 
-class Client extends Authenticatable
+class Client extends Model
 {
 
-    protected $table='client';
+    protected $table = 'client';
 
     /**
      * The attributes that are mass assignable.

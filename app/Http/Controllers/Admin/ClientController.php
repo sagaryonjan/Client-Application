@@ -2,8 +2,13 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Http\Requests\Client\AddFormValidation;
+
 class ClientController extends AdminBaseController
 {
+
+    protected $scope      = 'client';
+    protected $base_path = 'admin.client.';
 
     /**
      * Show the client list.
@@ -12,7 +17,7 @@ class ClientController extends AdminBaseController
      */
     public function index()
     {
-        return view('admin.client.index');
+        return view(parent::loadDataToView($this->base_path.'index'));
     }
 
     /**
@@ -22,6 +27,10 @@ class ClientController extends AdminBaseController
      */
     public function create()
     {
-        return view('admin.client.create');
+        return view(parent::loadDataToView($this->base_path.'create'));
+    }
+
+    public function store(AddFormValidation $request){
+        dd($request);
     }
 }

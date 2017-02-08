@@ -1,15 +1,13 @@
 <?php
 
-namespace App\Http\Controllers\Frontend;
-
+namespace App\Http\Controllers;
 
 use App\Client;
-use App\Http\Controllers\Controller;
 
 class HomeController extends Controller
 {
     /**
-     * Show the application dashboard.
+     * Show the view for home
      *
      * @return \Illuminate\Http\Response
      */
@@ -17,7 +15,7 @@ class HomeController extends Controller
     {
         $clients = Client::all();
 
-        return view('frontend.home',compact('clients'));
+        return view('home', compact('clients'));
     }
 
 }

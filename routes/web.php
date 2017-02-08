@@ -18,13 +18,19 @@ Auth::routes();
 */
 Route::group(['prefix' => 'admin/','as' => 'admin.',  'namespace' => 'Admin\\', 'middleware' => ['auth']], function () {
 
+    //dashboard route
     Route::get('dashboard',          [ 'as' => 'dashboard',       'uses' => 'DashboardController']);
+
+    //client routes
     Route::get('client',             [ 'as' => 'client.index',    'uses' => 'ClientController@index']);
     Route::get('client/create',      [ 'as' => 'client.create',   'uses' => 'ClientController@create']);
+    Route::post('client/store',      [ 'as' => 'client.store',    'uses' => 'ClientController@store']);
 
 });
 
 /*
  * Frontend Routes
 */
+
+//home route
 Route::get( '/',  [ 'as' => 'home',          'uses' => 'HomeController@index'] );

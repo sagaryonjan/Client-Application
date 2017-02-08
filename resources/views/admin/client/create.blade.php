@@ -1,6 +1,13 @@
 @extends('layouts.app')
 
-@section('css')@endsection
+@section('css')
+<style>
+    .margin {
+        float: right!important;
+        margin-top: -7px;
+    }
+</style>
+@endsection
 
 @section('content')
 
@@ -9,16 +16,16 @@
             <div class="col-md-10 col-md-offset-1">
                 <div class="panel panel-default">
 
-                    <div class="panel-heading">Client List
-                        <a href="{{ route('admin.client.index') }}">
-                            <button class="btn btn-primary">Client List</button>
+                    <div class="panel-heading">Add New Client
+                        <a href="{{ AppHelper::getAdminRoute($scope.'.index') }}">
+                            <button class="btn btn-primary margin">Client List</button>
                         </a>
                     </div>
 
                     <div class="panel-body">
-                        <form id="signupForm">
-
-                            @include('admin.client.partials._form')
+                        <form id="signupForm" action="{{ AppHelper::getAdminRoute($scope.'.store') }}" method="post">
+                            {!! csrf_field() !!}
+                            @include($view_path.'partials._form')
 
                             <button type="submit" class="btn btn-default">Submit</button>
 
@@ -32,4 +39,4 @@
 
 @endsection
 
-@section('js') @include('admin.client.partials.script') @endsection
+@section('js') @include($view_path.'partials.script') @endsection
