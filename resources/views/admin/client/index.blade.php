@@ -17,8 +17,10 @@
                 <div class="panel panel-default">
 
                     <div class="panel-heading">Client List
-                        <a href="{{ AppHelper::getAdminRoute($scope.'.download_csv') }}" class="btn btn-primary">Export as CSV</a>
-                        <a href="{{ AppHelper::getAdminRoute($scope.'.create') }}" class="btn btn-primary margin">Add New Client</a>
+                        <a href="{{ AppHelper::getAdminRoute($scope.'.download_csv') }}" class="btn btn-primary">
+                            Export as CSV</a>
+                        <a href="{{ AppHelper::getAdminRoute($scope.'.create') }}" class="btn btn-primary margin">
+                            Add New Client</a>
                     </div>
 
                     <div class="panel-body">
@@ -31,6 +33,7 @@
                                 <th>Phone</th>
                                 <th>Date of Birth</th>
                                 <th>Gender</th>
+                                <th>Action</th>
                             </tr>
 
                             </thead>
@@ -44,6 +47,14 @@
                                 <td>{{ $data->phone }}</td>
                                 <td>{{ $data->birth_date }}</td>
                                 <td>{{ $data->gender }}</td>
+                                <td>
+                                    <a href="{{ AppHelper::getAdminRoute($scope.'.show', $data->id) }}"
+                                       class="btn btn-primary">Show</a>
+                                    <a href="{{ AppHelper::getAdminRoute($scope.'.edit', $data->id) }}"
+                                       class="btn btn-success">Edit</a>
+                                    <a href="{{ AppHelper::getAdminRoute($scope.'.delete', $data->id) }}"
+                                       class="btn btn-danger">Delete</a>
+                                </td>
                             </tr>
                             @endforeach
                             </tbody>

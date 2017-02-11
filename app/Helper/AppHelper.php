@@ -1,12 +1,15 @@
 <?php
 
-namespace App\Client;
+namespace App\Helper;
 
 class AppHelper {
 
-    public function getAdminRoute($route)
+    public function getAdminRoute($route, $id = null)
     {
-        return route('admin.'.$route);
+        if($id == null)
+            return route('admin.'.$route);
+        else
+            return route('admin.'.$route, $id);
     }
 
     public function showValidationMessage($errors, $field)

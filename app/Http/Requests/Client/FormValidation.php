@@ -4,7 +4,7 @@ namespace App\Http\Requests\Client;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class AddFormValidation extends FormRequest
+class FormValidation extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -27,7 +27,7 @@ class AddFormValidation extends FormRequest
             'name'                 => 'required | max:25',
             'birth_date'           => 'required | date',
             'phone'                => 'required | max:50',
-            'email'                => 'required | email | unique:client,email',
+            'email'                => 'required | email',
             'address'              => 'required | min:3',
             'nationality'          => 'required',
             'gender'               => 'required',

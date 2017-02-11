@@ -3,14 +3,20 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Client;
-use App\Http\Requests\Client\AddFormValidation;
+use App\ClientApplication\Client\Client as ClientServices;
+use App\Http\Requests\Client\FormValidation;
 use Response;
 
-class ClientController extends AdminBaseController
-{
+class ClientController extends AdminBaseController {
 
-    protected $scope      = 'client';
+    protected $scope     = 'client';
     protected $base_path = 'admin.client.';
+    protected $client;
+
+    public function __construct(ClientServices $client)
+    {
+       $this->client = $client;
+    }
 
     /**
      * Show the client list.
@@ -36,31 +42,97 @@ class ClientController extends AdminBaseController
         return view(parent::loadDataToView($this->base_path.'create'));
     }
 
-    public function store(AddFormValidation $request){
+    /**
+     * Show the view for adding client.
+     *
+     * @param FormValidation $request
+     * @return \Illuminate\Http\Response
+     */
 
-        Client::create($this->getArrayDataFromRequest($request));
+    public function store(FormValidation $request){
+
+        Client::create($this->client->getArrayDataFromRequest($request));
 
         $fp = fopen(public_path().'/file/client_list.csv', "a");
-        $this->fputcsv_eol($fp, $this->getArrayDataFromRequest($request));
+        $this->fputcsv_eol($fp, $this->client->getArrayDataFromRequest($request));
         fclose($fp);
 
       return redirect()->route($this->base_path.'index');
     }
 
-    private function getArrayDataFromRequest($request){
+    /**
+     * Show the view of detail the specified resource.
+     *
+     * @param  int $id
+     * @return \Illuminate\Http\Response
+     */
+    public function show($id){
+        if (!$this->client->idExist($id)) {
+            return redirect()->route($this->error_route)->withErrors(['message' => 'Invalid Id']);
+        }
+        $data = [];
+        $data['row'] = $this->client->model;
 
-           return [
-                'name'                   => $request->get('name'),
-                'gender'                 => $request->get('gender'),
-                'phone'                  => $request->get('phone'),
-                'email'                  => $request->get('email') ,
-                'address'                => $request->get('address'),
-                'nationality'            => $request->get('nationality'),
-                'birth_date'             => $request->get('birth_date'),
-                'educational_background' => $request->get('education_background'),
-                'prefer_contact'         => $request->get('prefer_contact'),
-           ];
+        return view(parent::loadDataToView($this->base_path.'show'), compact('data'));
+    }
 
+    /**
+     * Show the form for editing the specified resource.
+     *
+     * @param  int $id
+     * @return \Illuminate\Http\Response
+     */
+    public function edit($id){
+
+        if (!$this->client->idExist($id)) {
+            return redirect()->route($this->error_route)->withErrors(['message' => 'Invalid Id']);
+        }
+
+        $data = [];
+        $data['row'] = $this->client->model;
+
+        return view(parent::loadDataToView($this->base_path.'edit'), compact('data'));
+    }
+
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param FormValidation $request
+     * @param  int $id
+     * @return \Illuminate\Http\Response
+     */
+    public function update(FormValidation $request, $id){
+
+        if (!$this->client->idExist($id)) {
+            return redirect()->route($this->error_route)->withErrors(['message' => 'Invalid Id']);
+        }
+
+        $this->client->model->update($this->client->getArrayDataFromRequest($request));
+
+        if($this->client->model){
+            $this->client->updateCsvFile();
+        }
+
+        return redirect()->route($this->base_path.'index');
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  int $id
+     * @return \Illuminate\Http\Response
+     */
+    public function delete($id){
+
+        if (!$this->client->idExist($id)) {
+            return redirect()->route($this->error_route)->withErrors(['message' => 'Invalid Id']);
+        }
+
+        $result = $this->client->model->delete();
+        if($result) {
+            $this->client->updateCsvFile();
+        }
+        return redirect()->route($this->base_path.'index');
     }
 
     public function downloadCvs(){

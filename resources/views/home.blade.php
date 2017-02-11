@@ -9,7 +9,7 @@
                 <div class="panel-heading">All Client</div>
 
                 <div class="panel-body">
-
+                    <p>Please Register To View Manage Client</p>
                 </div>
             </div>
         </div>

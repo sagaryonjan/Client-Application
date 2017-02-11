@@ -2,8 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Client;
-
 class HomeController extends Controller
 {
     /**
@@ -13,9 +11,7 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $clients = Client::all();
-
-        return view('home', compact('clients'));
+        return view('home');
     }
 
 }

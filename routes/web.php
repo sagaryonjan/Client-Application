@@ -25,6 +25,10 @@ Route::group(['prefix' => 'admin/','as' => 'admin.',  'namespace' => 'Admin\\', 
     Route::get('client',               [ 'as' => 'client.index',        'uses' => 'ClientController@index']);
     Route::get('client/create',        [ 'as' => 'client.create',       'uses' => 'ClientController@create']);
     Route::post('client/store',        [ 'as' => 'client.store',        'uses' => 'ClientController@store']);
+    Route::get('client/edit/{id}',     [ 'as' => 'client.edit',         'uses' => 'ClientController@edit']);
+    Route::put('client/update/{id}',   [ 'as' => 'client.update',       'uses' => 'ClientController@update']);
+    Route::get('client/delete/{id}',   [ 'as' => 'client.delete',       'uses' => 'ClientController@delete']);
+    Route::get('client/show/{id}',     [ 'as' => 'client.show',         'uses' => 'ClientController@show']);
     Route::get('client/download/csv',  [ 'as' => 'client.download_csv', 'uses' => 'ClientController@downloadCvs']);
 
 });

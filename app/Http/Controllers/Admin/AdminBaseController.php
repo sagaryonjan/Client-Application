@@ -43,16 +43,10 @@ class AdminBaseController extends Controller
         if ($with_file_name)
             array_pop($path_arr);
 
-        // Map the Translation directory
         return implode('.', $path_arr) . '.';
     }
 
 
-    // Writes an array to an open CSV file with a custom end of line.
-//
-// $fp: a seekable file pointer. Most file pointers are seekable,
-//   but some are not. example: fopen('php://output', 'w') is not seekable.
-// $eol: probably one of "\r\n", "\n", or for super old macs: "\r"
     public function fputcsv_eol($handle, $array, $delimiter = ',', $enclosure = '"', $eol = "\n") {
         $return = fputcsv($handle, $array, $delimiter, $enclosure);
         if($return !== FALSE && "\n" != $eol && 0 === fseek($handle, -1, SEEK_CUR)) {

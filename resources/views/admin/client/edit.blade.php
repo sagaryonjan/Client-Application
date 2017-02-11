@@ -23,12 +23,16 @@
                     </div>
 
                     <div class="panel-body">
-                        <form id="signupForm" action="{{ AppHelper::getAdminRoute($scope.'.store') }}" method="post">
-                            {!! csrf_field() !!}
-                            @include($view_path.'partials._form')
+                    <form id="signupForm" action="{{ AppHelper::getAdminRoute($scope.'.update', $data['row']->id) }}"
+                          method="post">
+                        <input name="_method" type="hidden" value="PUT">
+                        {!! csrf_field() !!}
 
-                            <button type="submit" class="btn btn-default">Submit</button>
-                        </form>
+                        @include($view_path.'partials._form')
+
+                        <button type="submit" class="btn btn-default">Submit</button>
+
+                    </form>
 
                     </div>
                 </div>

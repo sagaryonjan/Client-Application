@@ -5,7 +5,7 @@ namespace App\Providers;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\App;
 
-class ClientServiceProvider extends ServiceProvider
+class HelperServiceProvider extends ServiceProvider
 {
     /**
      * Bootstrap the application services.
@@ -26,7 +26,7 @@ class ClientServiceProvider extends ServiceProvider
     {
         App::bind('apphelper', function()
         {
-            return new \App\Client\AppHelper;
+            return new \App\Helper\AppHelper;
         });
     }
 }
