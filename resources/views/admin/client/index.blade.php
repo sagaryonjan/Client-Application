@@ -17,40 +17,35 @@
                 <div class="panel panel-default">
 
                     <div class="panel-heading">Client List
-                        <a href="{{ AppHelper::getAdminRoute($scope.'.create') }}">
-                            <button class="btn btn-primary margin">Add New Client</button>
-                        </a>
+                        <a href="{{ AppHelper::getAdminRoute($scope.'.download_csv') }}" class="btn btn-primary">Export as CSV</a>
+                        <a href="{{ AppHelper::getAdminRoute($scope.'.create') }}" class="btn btn-primary margin">Add New Client</a>
                     </div>
 
                     <div class="panel-body">
                         <table class="table">
                             <thead>
                             <tr>
-                                <th>#</th>
-                                <th>First Name</th>
-                                <th>Last Name</th>
-                                <th>Username</th>
+                                <th>ID</th>
+                                <th>Name</th>
+                                <th>Email</th>
+                                <th>Phone</th>
+                                <th>Date of Birth</th>
+                                <th>Gender</th>
                             </tr>
+
                             </thead>
+
                             <tbody>
+                            @foreach($data['row'] as $data)
                             <tr>
-                                <th scope="row">1</th>
-                                <td>Mark</td>
-                                <td>Otto</td>
-                                <td>@mdo</td>
+                                <th scope="row">{{ $data->id }}</th>
+                                <td>{{ $data->name }}</td>
+                                <td>{{ $data->email }}</td>
+                                <td>{{ $data->phone }}</td>
+                                <td>{{ $data->birth_date }}</td>
+                                <td>{{ $data->gender }}</td>
                             </tr>
-                            <tr>
-                                <th scope="row">2</th>
-                                <td>Jacob</td>
-                                <td>Thornton</td>
-                                <td>@fat</td>
-                            </tr>
-                            <tr>
-                                <th scope="row">3</th>
-                                <td>Larry</td>
-                                <td>the Bird</td>
-                                <td>@twitter</td>
-                            </tr>
+                            @endforeach
                             </tbody>
                         </table>
 

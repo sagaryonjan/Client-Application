@@ -22,9 +22,10 @@ Route::group(['prefix' => 'admin/','as' => 'admin.',  'namespace' => 'Admin\\', 
     Route::get('dashboard',          [ 'as' => 'dashboard',       'uses' => 'DashboardController']);
 
     //client routes
-    Route::get('client',             [ 'as' => 'client.index',    'uses' => 'ClientController@index']);
-    Route::get('client/create',      [ 'as' => 'client.create',   'uses' => 'ClientController@create']);
-    Route::post('client/store',      [ 'as' => 'client.store',    'uses' => 'ClientController@store']);
+    Route::get('client',               [ 'as' => 'client.index',        'uses' => 'ClientController@index']);
+    Route::get('client/create',        [ 'as' => 'client.create',       'uses' => 'ClientController@create']);
+    Route::post('client/store',        [ 'as' => 'client.store',        'uses' => 'ClientController@store']);
+    Route::get('client/download/csv',  [ 'as' => 'client.download_csv', 'uses' => 'ClientController@downloadCvs']);
 
 });
 

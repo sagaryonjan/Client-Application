@@ -3,6 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use AppHelper;
 
 class Client extends Model
 {
@@ -15,9 +16,14 @@ class Client extends Model
      * @var array
      */
     protected $fillable = [
-        'name', 'gender', 'phone','email','address','nationality','birth_date','education_background',
+        'name', 'gender', 'phone','email','address','nationality','birth_date','educational_background',
         'prefer_contact'
     ];
 
+    public function setBirthDateAttribute($value){
+
+        $this->attributes['birth_date'] = AppHelper::formatDate('Y-m-d', $value);
+
+    }
 
 }

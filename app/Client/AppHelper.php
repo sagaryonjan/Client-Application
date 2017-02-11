@@ -94,4 +94,10 @@ class AppHelper {
         return $username;
     }
 
+    //Format Date to insert in database
+    public function formatDate($format, $date)
+    {
+        return date($format, strtotime($date));
+    }
+
 }
