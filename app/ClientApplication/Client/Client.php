@@ -39,7 +39,7 @@ class Client
             'address'                => $request->get('address'),
             'nationality'            => $request->get('nationality'),
             'birth_date'             => $request->get('birth_date'),
-            'educational_background' => $request->get('education_background'),
+            'educational_background' => $request->get('educational_background'),
             'prefer_contact'         => $request->get('prefer_contact'),
         ];
 

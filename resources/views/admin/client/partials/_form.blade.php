@@ -64,9 +64,18 @@
         <div class="form-group {{ AppHelper::ShowValidationClass($errors, 'gender') }}">
             <label for="gender">Gender:</label>
             <div id="error-wrapper">
-                <label class="radio-inline"><input type="radio" value="male" name="gender">Male</label>
-                <label class="radio-inline"><input type="radio" value="female" name="gender">Female</label>
-                <label class="radio-inline"><input type="radio" value="other" name="gender">Other</label>
+                <label class="radio-inline">
+                    <input type="radio" {{ AppHelper::getRadioFormValue('gender','male', isset($data)?$data:'') }}
+                    value="male" name="gender">Male
+                </label>
+                <label class="radio-inline">
+                    <input type="radio" {{ AppHelper::getRadioFormValue('gender', 'female', isset($data)?$data:'') }}
+                           value="female" name="gender">Female
+                </label>
+                <label class="radio-inline">
+                    <input type="radio" {{ AppHelper::getRadioFormValue('gender', 'other', isset($data)?$data:'') }}
+                           value="other" name="gender">Other
+                </label>
             </div>
             {{ AppHelper::showValidationMessage($errors, 'gender') }}
         </div>
@@ -77,14 +86,14 @@
             <label for="gender">Prefer Mode:</label>
             <div id="error-wrapper">
                 <label class="radio-inline">
-                    <input type="radio" {{ AppHelper::getFormStatus('email', isset($data)?$data:'') }}
+                    <input type="radio" {{ AppHelper::getRadioFormValue('prefer_contact', 'email', isset($data)?$data:'') }}
                     value="email" name="prefer_contact">Email
                 </label>
                 <label class="radio-inline">
-                    <input type="radio" {{ AppHelper::getFormStatus('phone', isset($data)?$data:'') }}
+                    <input type="radio" {{ AppHelper::getRadioFormValue('prefer_contact', 'phone', isset($data)?$data:'') }}
                     value="phone" name="prefer_contact">Phone</label>
                 <label class="radio-inline">
-                    <input type="radio" {{ AppHelper::getFormStatus('none', isset($data)?$data:'') }}
+                    <input type="radio" {{ AppHelper::getRadioFormValue('prefer_contact', 'none', isset($data)?$data:'') }}
                     value="none" name="prefer_contact">None</label>
             </div>
             {{ AppHelper::showValidationMessage($errors, 'prefer_contact') }}
@@ -92,11 +101,12 @@
     </div>
 </div>
 
-<div class="form-group {{ AppHelper::ShowValidationClass($errors, 'education_background') }}">
-    <label for="education_background">Eduction Background:</label>
-    <textarea id="education_background" name="education_background" placeholder="Enter Education Background"
-              rows="6" class="form-control"></textarea>
-    {{ AppHelper::showValidationMessage($errors, 'education_background') }}
+<div class="form-group {{ AppHelper::ShowValidationClass($errors, 'educational_background') }}">
+    <label for="educational_background">Eduction Background:</label>
+    <textarea id="educational_background" name="educational_background" placeholder="Enter Education Background"
+              rows="6" class="form-control">{{ AppHelper::getFormValue('educational_background', isset($data)?$data:'' ) }}
+    </textarea>
+    {{ AppHelper::showValidationMessage($errors, 'educational_background') }}
 </div>
 
 

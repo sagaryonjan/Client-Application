@@ -4,6 +4,38 @@ namespace App\Helper;
 
 class AppHelper {
 
+    /**
+     * Generates html according to message_type and stores in
+     * session flash storage
+     *
+     * @param $message_type bootstrap alert message type
+     * @param $message html message
+     */
+    public function flash($message_type, $message)
+    {
+        $message_type = $this->checkBootstrapAlertClass($message_type);
+
+        $message = "<div class=\"alert alert-" . $message_type . "\">
+                        <button data-dismiss=\"alert\" class=\"close\" type=\"button\">
+                            <i class=\"icon-remove\"></i>
+                        </button>
+                        " . $message . "
+                        <br>
+					</div>";
+
+        request()->session()->flash('message', $message);
+    }
+
+    protected function checkBootstrapAlertClass($message_type)
+    {
+        $classes = ['info', 'success', 'warning', 'danger'];
+        if (!in_array($message_type, $classes)) {
+            return 'info';
+        }
+
+        return $message_type;
+    }
+
     public function getAdminRoute($route, $id = null)
     {
         if($id == null)
@@ -37,57 +69,14 @@ class AppHelper {
         return $data;
     }
 
-    public function getFormStatus($action, $data = '')
-    {
-        $email = '';
-        $phone = '';
-        $none = 'checked';
+    public function getRadioFormValue($field, $value, $data=''){
 
-        if (!empty($data) && $data['row']->prefer_contact == 'email') {
+        if (old($field) == $value)
+                 return 'checked';
 
-            $email = 'checked';
-            $phone = '';
-            $none  = '';
-        }
+        if (!empty($data) && $data['row']->$field == $value)
+                return 'checked';
 
-        if (!empty($data) && $data['row']->prefer_contact == 'phone') {
-
-            $email = '';
-            $phone = 'checked';
-            $none  = '';
-        }
-
-        if (old('prefer_contact')) {
-
-            if (old('prefer_contact') == 'email') {
-
-                $email = 'checked';
-                $phone = '';
-                $none = '';
-
-            }
-            elseif(old('prefer_contact') == 'phone') {
-
-                $email = '';
-                $phone = 'checked';
-                $none = '';
-
-            }
-            else {
-
-                $email = '';
-                $phone = '';
-                $none  = 'checked';
-            }
-        }
-
-        if ($action == 'email')
-            return $email;
-
-        if ($action == 'phone')
-            return $phone;
-
-        return $none;
     }
 
     //Get Logged in user na

@@ -32,7 +32,7 @@ class FormValidation extends FormRequest
             'nationality'          => 'required',
             'gender'               => 'required',
             'prefer_contact'       => 'required',
-            'education_background' => 'required | min:10',
+            'educational_background' => 'required | min:10',
         ];
     }
 }

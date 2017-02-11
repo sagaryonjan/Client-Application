@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Client;
 use App\ClientApplication\Client\Client as ClientServices;
 use App\Http\Requests\Client\FormValidation;
-use Response;
+use Response, AppHelper;
 
 class ClientController extends AdminBaseController {
 
@@ -57,7 +57,8 @@ class ClientController extends AdminBaseController {
         $this->fputcsv_eol($fp, $this->client->getArrayDataFromRequest($request));
         fclose($fp);
 
-      return redirect()->route($this->base_path.'index');
+        AppHelper::flash('success', 'Client has been created Successfully');
+        return redirect()->route($this->base_path.'index');
     }
 
     /**
@@ -113,6 +114,7 @@ class ClientController extends AdminBaseController {
             $this->client->updateCsvFile();
         }
 
+        AppHelper::flash('success', 'Client has been updated Successfully');
         return redirect()->route($this->base_path.'index');
     }
 
@@ -132,6 +134,8 @@ class ClientController extends AdminBaseController {
         if($result) {
             $this->client->updateCsvFile();
         }
+
+        AppHelper::flash('success', 'Client has been deleted Successfully');
         return redirect()->route($this->base_path.'index');
     }
 

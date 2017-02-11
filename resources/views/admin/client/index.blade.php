@@ -14,6 +14,9 @@
     <div class="container">
         <div class="row">
             <div class="col-md-10 col-md-offset-1">
+                @if (session()->has('message'))
+                    {!! session()->get('message') !!}
+                @endif
                 <div class="panel panel-default">
 
                     <div class="panel-heading">Client List
@@ -53,7 +56,7 @@
                                     <a href="{{ AppHelper::getAdminRoute($scope.'.edit', $data->id) }}"
                                        class="btn btn-success">Edit</a>
                                     <a href="{{ AppHelper::getAdminRoute($scope.'.delete', $data->id) }}"
-                                       class="btn btn-danger">Delete</a>
+                                       class="btn btn-danger" onclick="return confirm('Are You Sure??')">Delete</a>
                                 </td>
                             </tr>
                             @endforeach
