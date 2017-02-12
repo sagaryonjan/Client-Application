@@ -42,27 +42,28 @@
                             </thead>
 
                             <tbody>
-                            @foreach($data['row'] as $data)
+                            @foreach($clients as $client)
                             <tr>
-                                <th scope="row">{{ $data->id }}</th>
-                                <td>{{ $data->name }}</td>
-                                <td>{{ $data->email }}</td>
-                                <td>{{ $data->phone }}</td>
-                                <td>{{ $data->birth_date }}</td>
-                                <td>{{ $data->gender }}</td>
+                                <th scope="row">{{ $client->id }}</th>
+                                <td>{{ $client->name }}</td>
+                                <td>{{ $client->email }}</td>
+                                <td>{{ $client->phone }}</td>
+                                <td>{{ AppHelper::formatDate('M-d-Y', $client->birth_date) }}</td>
+                                <td>{{ $client->gender }}</td>
                                 <td>
-                                    <a href="{{ AppHelper::getAdminRoute($scope.'.show', $data->id) }}"
+                                    <a href="{{ AppHelper::getAdminRoute($scope.'.show', $client->id) }}"
                                        class="btn btn-primary">Show</a>
-                                    <a href="{{ AppHelper::getAdminRoute($scope.'.edit', $data->id) }}"
+                                    <a href="{{ AppHelper::getAdminRoute($scope.'.edit', $client->id) }}"
                                        class="btn btn-success">Edit</a>
-                                    <a href="{{ AppHelper::getAdminRoute($scope.'.delete', $data->id) }}"
+                                    <a href="{{ AppHelper::getAdminRoute($scope.'.delete', $client->id) }}"
                                        class="btn btn-danger" onclick="return confirm('Are You Sure??')">Delete</a>
                                 </td>
                             </tr>
                             @endforeach
                             </tbody>
-                        </table>
 
+                        </table>
+                        {!! $clients->render() !!}
                     </div>
                 </div>
             </div>

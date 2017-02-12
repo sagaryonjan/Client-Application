@@ -25,11 +25,10 @@ class ClientController extends AdminBaseController {
      */
     public function index()
     {
-        $data = [];
-        $data['row'] = Client::select('id', 'name', 'gender', 'birth_date', 'phone', 'email', 'address',
+        $clients = Client::select('id', 'name', 'gender', 'birth_date', 'phone', 'email', 'address',
             'prefer_contact')->paginate(10);
 
-        return view(parent::loadDataToView($this->base_path.'index'), compact('data'));
+        return view(parent::loadDataToView($this->base_path.'index'), compact('clients'));
     }
 
     /**
