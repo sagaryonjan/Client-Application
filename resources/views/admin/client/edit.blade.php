@@ -23,7 +23,7 @@
                     </div>
 
                     <div class="panel-body">
-                    <form id="signupForm" action="{{ AppHelper::getAdminRoute($scope.'.update', $data['row']->id) }}"
+                    <form id="clientForm" action="{{ AppHelper::getAdminRoute($scope.'.update', $data['row']->id) }}"
                           method="post">
                         <input name="_method" type="hidden" value="PUT">
                         {!! csrf_field() !!}

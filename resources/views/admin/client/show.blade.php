@@ -49,7 +49,7 @@
                             <dt>Prefer Mode :</dt>
                             <dd>{{ $data['row']->prefer_contact }}</dd>
                             <dt>Education Background :</dt>
-                            <dd>{{ $data['row']->education_background }}</dd>
+                            <dd>{{ $data['row']->educational_background }}</dd>
                         </dl>
                     </div>
                 </div>

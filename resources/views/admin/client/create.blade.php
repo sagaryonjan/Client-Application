@@ -23,7 +23,7 @@
                     </div>
 
                     <div class="panel-body">
-                        <form id="signupForm" action="{{ AppHelper::getAdminRoute($scope.'.store') }}" method="post">
+                        <form id="clientForm" action="{{ AppHelper::getAdminRoute($scope.'.store') }}" method="post">
                             {!! csrf_field() !!}
                             @include($view_path.'partials._form')
 

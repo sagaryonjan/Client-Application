@@ -6,7 +6,7 @@
 
 <script type="text/javascript">
     $( document ).ready( function () {
-        $( "#signupForm" ).validate( {
+        $( "#clientForm" ).validate( {
             rules: {
                 name: "required",
                 birth_date: "required",
@@ -21,6 +21,7 @@
                 },
                 gender: "required",
                 prefer_contact: "required",
+                educational_background: "required",
                 email: {
                     required: true,
                     email: true
@@ -34,6 +35,7 @@
                 gender: "Please enter your gender",
                 email: "Please enter a valid email address",
                 prefer_contact: "Prefer Contact field is required",
+                educational_background: "Education Background field is required",
                 nationality: {
                     required: "Please enter your gender",
                 },
@@ -43,8 +45,8 @@
                 // Add the `help-block` class to the error element
                 error.addClass( "help-block" );
 
-                if ( element.prop( "type" ) === "radio" ) {
-                    error.insertAfter( element.$( "#error-wrapper" ) );
+                if ( element.prop( "type" ) == "radio" ) {
+                    error.insertAfter( element.parents( ".error-wrapper" ) );
                 } else {
                     error.insertAfter( element );
                 }
